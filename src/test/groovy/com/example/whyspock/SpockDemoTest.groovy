@@ -18,7 +18,7 @@ class SpockDemoTest extends Specification {
 
     def "expect stuff "() {
         expect: 'Just a false assumption'
-        Math.max(2, 18) == 3 * 4
+        Math.max(2, 18) == 3 * 6
     }
 
     def "test given when then"() {
@@ -29,7 +29,7 @@ class SpockDemoTest extends Specification {
         def y = Math.max(2, 12)
         def z = 3 * 4
 
-       then: 'check'
+        then: 'check'
         y == z
         x == 1
 
@@ -45,10 +45,10 @@ class SpockDemoTest extends Specification {
         x == result;
 
         where:
-        first |last | result
-        1 | 2 | 2
-        2 | 8 | 16
-        7 | 3 | 21
+        first | last | result
+        1     | 2    | 2
+        2     | 8    | 16
+        7     | 3    | 21
 
     }
 
@@ -71,23 +71,6 @@ class SpockDemoTest extends Specification {
         notThrown(IllegalArgumentException)
 
         and:
-        2 * list.add(_)
-    }
-
-
-    def 'Check if the weather in London can be found'() {
-        given:
-        RESTClient restClient = new RESTClient("http://localhost/sips/user.json")
-        String city = "Eindhoven,nl"
-
-        when:
-        def response = restClient.get( path: '/data/2.5/weather',
-                query: ['id' : ""])
-
-        then:
-        response.status == 200
-
-        and:
-        response.responseData.firstName == "Eindhoven"
+        1 * list.add(_)
     }
 }

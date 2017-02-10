@@ -40,17 +40,17 @@ public class SpockRestApiTest extends Specification {
         def response = new RESTClient("http://localhost:${wireMockRule.port()}").get(path: '/some/users')
 
         then: 'status is OK'
-        response.status == 200
+        200 == response.status
 
         and: "we expect 2 users"
-        response.data.size == 2
+         2 == response.data.size
 
         and: 'Check second firstName only'
 
-        response.data[1].firstName == 'Jane'
+         'Jane' == response.data[1].firstName
 
         and: 'Check entire response'
-        response.data == [[id: 1, firstName: 'Joe', lastName: 'Doe'], [id: 2, firstName: 'Jane', lastName: 'Doe']]
+         [[id: 1, firstName: 'Joe', lastName: 'Doe'], [id: 2, firstName: 'Jane', lastName: 'Doe']] == response.data
 
         and: "the mock to be invoked exactly once"
         1L == wireMockStub.count {
